@@ -37,7 +37,6 @@ public class Controller {
         try(final OutputStream output = new FileOutputStream(file.getPath())){
             try(final DataOutputStream dataOutput=new DataOutputStream(output)){
                 dataOutput.writeChars(str);
-                dataOutput.close();
             }
         }
     }
