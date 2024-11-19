@@ -10,10 +10,13 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -85,11 +88,13 @@ public class BadIOGUI {
                  * operation. I/O operations may take a long time, during which
                  * your UI becomes completely unresponsive.
                  */
-                try(InputStream inputStream = new FileInputStream(PATH)){
-
-                    for(int i =0;(i=inputStream.read())!=-1;){
-                        System.out.println(i);
-                    }
+                try(FileInputStream input = new FileInputStream(PATH);
+                    InputStreamReader reader = new InputStreamReader(input,StandardCharsets.UTF_8);
+                    BufferedReader buffer = new BufferedReader(reader)){
+                        String str = "";
+                        while ((str = buffer.readLine()) != null) {
+                            System.out.println(str);
+                        }
 
                 } catch (IOException e1) {
                     JOptionPane.showMessageDialog(frame, e1, "Error", JOptionPane.ERROR_MESSAGE);
