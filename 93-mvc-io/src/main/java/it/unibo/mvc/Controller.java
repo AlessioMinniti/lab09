@@ -7,7 +7,7 @@ import java.lang.*;
  *
  */
 public interface Controller {
-    public void setStringToPrint();
+    public void setStringToPrint(String str) throws NullPointerException;
 
     public String getStringToPrint();
 
